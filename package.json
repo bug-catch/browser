@@ -1,6 +1,6 @@
 {
     "name": "@bug-catch/browser",
-    "version": "3.0.1",
+    "version": "3.0.3",
     "main": "./dist/bugcatch.js",
     "homepage": "https://github.com/bug-catch/browser#readme",
     "description": "Catch all errors and log custom events within any website.",

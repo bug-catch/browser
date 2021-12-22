@@ -122,7 +122,7 @@ export const recordEvent = (name, data, userOptions) => {
         console.log(`[Bug Catch] Event: ${name}`, { name, data });
 
     // Send incident data to server
-    post(`${options.base_url}/event`, newEvent(name, data, options));
+    post(`${options.base_url}/catch/event`, newEvent(name, data, options));
 };
 
 /**
