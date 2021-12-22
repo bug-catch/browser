@@ -18,13 +18,13 @@ export const newEvent = (type, data, options) => {
  * @param {string} url address to post to
  * @param {object} data object to send
  */
-export const xhrPost = (url, data) => {
+export const post = (url, data) => {
     try {
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(JSON.stringify(data));
+        const req = new XMLHttpRequest();
+        req.open("POST", url, true);
+        req.setRequestHeader("Content-Type", "application/json");
+        req.send(JSON.stringify(data));
     } catch (error) {
-        console.error("[Bug Catch] XHR Error:", error);
+        console.error("[Bug Catch] XHR post error:", error);
     }
 };

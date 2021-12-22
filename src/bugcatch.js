@@ -1,6 +1,6 @@
 "use strict";
 import { initVitals } from "./vitals";
-import { xhrPost, newEvent } from "./api";
+import { post, newEvent } from "./api";
 
 window.requestIdleCallback =
     window.requestIdleCallback ||
@@ -104,10 +104,7 @@ const onError = (evt) => {
     }
 
     // Send incident data to server
-    xhrPost(
-        `${options.base_url}/catch/event`,
-        newEvent("error", data, options)
-    );
+    post(`${options.base_url}/catch/event`, newEvent("error", data, options));
 
     return true;
 };
@@ -125,7 +122,7 @@ export const recordEvent = (name, data, userOptions) => {
         console.log(`[Bug Catch] Event: ${name}`, { name, data });
 
     // Send incident data to server
-    xhrPost(`${options.base_url}/event`, newEvent(name, data, options));
+    post(`${options.base_url}/event`, newEvent(name, data, options));
 };
 
 /**

@@ -1,6 +1,6 @@
 "use strict";
 import Perfume from "perfume.js";
-import { xhrPost, newEvent } from "./api";
+import { post, newEvent } from "./api";
 
 // Global vitals object
 const vitalsData = {};
@@ -17,7 +17,7 @@ const sendVitals = (vitalsData, userOptions) => {
         console.log("[Bug Catch] Web-Vitals data", vitalsData);
 
     // Send web vitals data to server
-    xhrPost(
+    post(
         `${userOptions.base_url}/catch/vitals`,
         newEvent("vitals", vitalsData, userOptions)
     );
