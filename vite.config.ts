@@ -10,7 +10,7 @@ export default defineConfig({
         lib: {
             name: "bugcatch",
             formats: ["es", "umd"],
-            entry: path.resolve(__dirname, "src/index.js"),
+            entry: path.resolve(__dirname, "src/index.ts"),
             fileName: (format) =>
                 format === "es" ? `index.js` : `index.${format}.js`,
         },
