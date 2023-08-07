@@ -13,7 +13,8 @@
         "test:watch": "vitest watch"
     },
     "dependencies": {
-        "perfume.js": "^6.3.0"
+        "perfume.js": "^6.3.0",
+        "react-device-detect": "^2.2.3"
     },
     "devDependencies": {
         "@types/node": "^20.4.8",

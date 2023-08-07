@@ -1,8 +1,17 @@
 import {
+    browserName,
+    browserVersion,
+    osName,
+    osVersion,
+    deviceType,
+} from "react-device-detect";
+
+import {
     errorFormat,
     initVitals,
     polyfillRequiredWindowFunctions,
     sendData,
+    toLower,
 } from "./helpers";
 
 polyfillRequiredWindowFunctions();
@@ -73,36 +82,31 @@ class BugCatch {
         }
 
         this.deviceInfo = undefined;
-        // if (this.captureDeviceInfo) this.setDeviceInfo();
+        if (this.captureDeviceInfo) this.setDeviceInfo();
     }
 
-    // setDeviceInfo = () => {
-    //     try {
-    //         const toLower = (str: any) =>
-    //             typeof str === "string" ? str.toLowerCase() : str;
-    //         this.deviceInfo = {
-    //             name: toLower(modelName),
-    //             brand: toLower(brand),
-    //             device: {
-    //                 0: "unknown",
-    //                 1: "phone",
-    //                 2: "tablet",
-    //                 3: "desktop",
-    //                 4: "tv",
-    //             }[(deviceType as number) || 0],
-    //             os: {
-    //                 name: toLower(osName),
-    //                 version: toLower(osVersion),
-    //             },
-    //         };
+    private setDeviceInfo = () => {
+        try {
+            this.deviceInfo = {
+                device: toLower(deviceType),
+                browser: {
+                    name: toLower(browserName),
+                    version: toLower(browserVersion),
+                },
+                os: {
+                    name: toLower(osName),
+                    version: toLower(osVersion),
+                },
+            };
 
-    //         if (this.logEvents) console.table([this.deviceInfo]);
-    //     } catch (error) {
-    //         console.error("[Bug Catch] Device info error:", error);
-    //     }
+            if (this.logEvents)
+                console.log("[Bug Catch] Device info", this.deviceInfo);
+        } catch (error) {
+            console.error("[Bug Catch] Device info error:", error);
+        }
 
-    //     return this.deviceInfo;
-    // };
+        return this.deviceInfo;
+    };
 
     /**
      * Send web-vitals data to the server.

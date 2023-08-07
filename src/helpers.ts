@@ -139,3 +139,6 @@ export const sendData = (url: string, data: any) => {
     req.setRequestHeader("Content-Type", "application/json");
     req.send(JSON.stringify(data));
 };
+
+export const toLower = (str: any) =>
+    typeof str === "string" ? str.toLowerCase() : str;
