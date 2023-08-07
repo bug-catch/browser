@@ -1,6 +1,6 @@
 {
     "name": "@bug-catch/browser",
-    "version": "4.1.3",
+    "version": "4.2.5",
     "homepage": "https://github.com/bug-catch/browser#readme",
     "description": "Catch all errors and log custom events within any website.",
     "author": {
