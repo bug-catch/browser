@@ -4,7 +4,6 @@ import {
     polyfillRequiredWindowFunctions,
     sendData,
 } from "./helpers";
-// import { initVitals } from "./vitals";
 
 polyfillRequiredWindowFunctions();
 
