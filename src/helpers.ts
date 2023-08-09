@@ -132,13 +132,21 @@ export const initVitals = ({
     });
 };
 
-export const sendData = (url: string, data: any) => {
-    // Uses `XMLHttpRequest` to maximize compatibility and reduce need for third-party libraries.
-    const req = new XMLHttpRequest();
-    req.open("POST", url, true);
-    req.setRequestHeader("Content-Type", "application/json");
-    req.send(JSON.stringify(data));
-};
+export const sendData = async (url: string, data: any) =>
+    new Promise((resolve, reject) => {
+        try {
+            // Uses `XMLHttpRequest` to maximize compatibility and reduce need for third-party libraries.
+            const req = new XMLHttpRequest();
+            req.onload = () => resolve(true);
+            req.onerror = () => reject(false);
+            req.open("POST", url, true);
+            req.setRequestHeader("Content-Type", "application/json");
+            req.send(JSON.stringify(data));
+        } catch (error) {
+            reject(error);
+            console.error("[Bug Catch] XHR post error:", error);
+        }
+    });
 
 export const toLower = (str: any) =>
     typeof str === "string" ? str.toLowerCase() : str;

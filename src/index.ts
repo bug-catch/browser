@@ -111,7 +111,7 @@ class BugCatch {
     /**
      * Send web-vitals data to the server.
      */
-    private _catchVitals = (data: any) => {
+    private _catchVitals = async (data: any) => {
         try {
             if (data?.hasSent) return false;
             data.hasSent = true;
@@ -119,7 +119,7 @@ class BugCatch {
             if (this.logEvents)
                 console.log("[Bug Catch] Web-Vitals data", data);
 
-            sendData(`${this.baseUrl}/catch/vitals`, data);
+            await sendData(`${this.baseUrl}/catch/vitals`, data);
 
             if (typeof window !== "undefined") {
                 window.localStorage.setItem(
@@ -138,9 +138,9 @@ class BugCatch {
     /**
      * Send event data to the server.
      */
-    private _catchEvent = (data: any) => {
+    private _catchEvent = async (data: any) => {
         try {
-            sendData(`${this.baseUrl}/catch/event`, data);
+            await sendData(`${this.baseUrl}/catch/event`, data);
         } catch (error) {
             console.error("[Bug Catch] XHR post error:", error);
         }
@@ -168,14 +168,18 @@ class BugCatch {
     /**
      * Handle error events
      */
-    onError = (evt: ErrorEvent | PromiseRejectionEvent) => {
-        this._catchEvent(this._newEvent("error", errorFormat(evt)));
+    onError = async (evt: ErrorEvent | PromiseRejectionEvent) => {
+        await this._catchEvent(this._newEvent("error", errorFormat(evt)));
     };
 
     /**
      * Create a new event and submit the data to the API.
      */
-    recordEvent = (name: string, data: any, incidentData: any = undefined) => {
+    recordEvent = async (
+        name: string,
+        data: any,
+        incidentData: any = undefined
+    ) => {
         if (this.logEvents)
             console.log(`[Bug Catch] Event: ${name}`, {
                 name,
@@ -184,7 +188,7 @@ class BugCatch {
             });
 
         // Send incident data to server
-        this._catchEvent(this._newEvent(name, data, incidentData));
+        await this._catchEvent(this._newEvent(name, data, incidentData));
     };
 }
 
